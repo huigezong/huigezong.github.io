@@ -27,6 +27,17 @@
 	text-align: center;
 }
 
+.openGame{
+	background:url(images/btn_jinru01.png);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	width: 50%;
+	height: 10%;
+	max-width: 250px;
+	z-index: 1;
+}
+
 </style>
 </head>
 <body>
@@ -48,15 +59,37 @@
    <a href="/build/AddOne/index.html">AddOne</a>
    <a href="/build/BlackJack/index.html">BlackJack</a>
 </div>
+<div>
+   <input type="button" id="openGame" class="openGame"></input>
+</div>
+
 <script type="text/javascript" src="js/three.js"></script>
 <script type="text/javascript" src="js/tt.js"></script>
 	
 <script src="js/swiper.min.js"></script>
+<script src="js/jquery-1.7.2.min.js" ></script>
 <script type="text/javascript">
-  var mySwiper = new Swiper('.swiper-container',{
-    loop: true,
+	var mySwiper = new Swiper('.swiper-container',{
+	loop: true,
 	autoplay: 3000,
-  });
+	});
+
+	$(function(){
+		var gameID = "1002";
+		var verifyNum = "475529";
+
+		appUrl = "com.izhangxin.circle."+gameID+"://izhangxin?param="+verifyNum;
+		$("#openGame").click(function(){
+			openApp();
+		});
+	});
+
+	function openApp(){
+		alert(appUrl);
+		window.location.href = appUrl;
+	}
+
+
 </script>
 </body>
 </html>
