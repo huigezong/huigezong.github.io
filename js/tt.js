@@ -7,7 +7,8 @@ var camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
 var cubes = Array();
 
 function init() {
-    renderer.setClearColor(0xbbbbbb);
+    //renderer.setClearColor(0xbbbbbb);
+    renderer.setClearColor(0xffffff);
    
     camera.position.set(25, 25, 25);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
@@ -19,6 +20,7 @@ function init() {
     scene.add(light);
 
 
+    /*
     var texture = new THREE.TextureLoader().load("images/jay.jpg");
     var Sphere = new THREE.Mesh(new THREE.SphereGeometry(2, 25, 25),
         new THREE.MeshPhongMaterial({
@@ -28,7 +30,8 @@ function init() {
             map : texture
         })
     );
-    //scene.add(Sphere);
+    scene.add(Sphere);
+    */
 
 
     /*
