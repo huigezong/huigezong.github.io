@@ -32,10 +32,14 @@
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	position: absolute;
-	width: 50%;
-	height: 10%;
+	width: 145px;
+	height: 47px;
 	max-width: 250px;
 	z-index: 1;
+}
+
+.firstname{
+
 }
 
 </style>
@@ -60,6 +64,13 @@
    <a href="/build/BlackJack/index.html">BlackJack</a>
 </div>
 <div>
+<form>
+	gameId:<br>
+	<input type="text" id="gameId" >
+	<br>
+	inviteCode:<br>
+	<input type="text" id="inviteCode">
+</form>
    <input type="button" id="openGame" class="openGame"></input>
 </div>
 
@@ -75,16 +86,19 @@
 	});
 
 	$(function(){
-		var gameID = "1138";
-		var verifyNum = "475529";
-
-		appUrl = "com.izhangxin.circle."+gameID+"://izhangxin?param="+verifyNum;
 		$("#openGame").click(function(){
 			openApp();
 		});
 	});
 
+	
+
 	function openApp(){
+		var gameId = document.getElementById("gameId").value;
+		var inviteCode = document.getElementById("inviteCode").value;
+		
+		appUrl = "com.izhangxin.circle."+gameId+"://izhangxin?param="+inviteCode;
+
 		alert(appUrl);
 		window.location.href = appUrl;
 	}
