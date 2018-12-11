@@ -74,9 +74,19 @@
 	<br>
 	inviteCode:<br>
 	<input type="text" id="inviteCode">
+   	<input type="button" id="openGame" class="openGame"></input>
 </form-->
-   <input type="button" id="openGame" class="openGame"></input>
 </div>
+
+<p id="nowTime"></p>
+<script>
+var myVar=setInterval(function(){myTimer()},300);
+function myTimer(){
+	var d=new Date();
+	var t=d.toLocaleTimeString();
+	document.getElementById("nowTime").innerHTML=t;
+}
+</script>
 
 <script type="text/javascript" src="js/three.js"></script>
 <script type="text/javascript" src="js/tt.js"></script>
@@ -111,15 +121,7 @@
 
 </script>
 
-<p id="nowTime"></p>
-<script>
-var myVar=setInterval(function(){myTimer()},300);
-function myTimer(){
-	var d=new Date();
-	var t=d.toLocaleTimeString();
-	document.getElementById("nowTime").innerHTML=t;
-}
-</script>
+
 
 </body>
 </html>
