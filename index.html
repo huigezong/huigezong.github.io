@@ -68,18 +68,19 @@
    <a href="/build/BlackJack/index.html">BlackJack</a>
 </div>
 <div>
-<form>
+<!--form>
 	gameId:<br>
 	<input type="text" id="gameId" >
 	<br>
 	inviteCode:<br>
 	<input type="text" id="inviteCode">
-</form>
+</form-->
    <input type="button" id="openGame" class="openGame"></input>
 </div>
 
 <script type="text/javascript" src="js/three.js"></script>
 <script type="text/javascript" src="js/tt.js"></script>
+<script type="text/javascript" src="js/vue.min.js"></script>
 	
 <script src="js/swiper.min.js"></script>
 <script src="js/jquery-1.7.2.min.js" ></script>
@@ -109,5 +110,16 @@
 
 
 </script>
+
+<p id="nowTime"></p>
+<script>
+var myVar=setInterval(function(){myTimer()},300);
+function myTimer(){
+	var d=new Date();
+	var t=d.toLocaleTimeString();
+	document.getElementById("nowTime").innerHTML=t;
+}
+</script>
+
 </body>
 </html>
