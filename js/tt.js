@@ -3,7 +3,7 @@ var renderer = new THREE.WebGLRenderer({
 });
 var scene = new THREE.Scene();
 // var camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
-var camera = new THREE.OrthographicCamera(-8, 8, 4.5, -4.5, 0.1, 100);
+var camera = new THREE.OrthographicCamera(-6, 6, 6, -6, 0.1, 100);
 
 var cubes = Array();
 var cubeNum = 3;
