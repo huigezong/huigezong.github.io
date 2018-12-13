@@ -51,7 +51,7 @@
 
 		}
 
-		.divS1
+		.divS111
 		{
 			border:2px solid #a1a1a1;
 			padding:10px 40px; 
@@ -92,7 +92,30 @@
 
 		}
 
+		.divS1{
+			/*background: #aaaaaa;*/
+			width: 355px;
+			height: 60px;
+			margin: 0 auto;
+			padding: 20px;
+			/*margin: 10px;*/
+		}
+
+		.divS2{
+			/*background: #aaaaaa;*/
+			width: 350px;
+			height: 350px;
+			margin: 0 auto;
+		}
+
+		.divS3{
+			/*background: #aaaaaa;*/
+			width: 62px;
+			height: 50px;
+			margin: 0 auto;
+		}
 	</style>
+
 </head>
 
 <body>
@@ -106,21 +129,21 @@
     </div> 
 -->
     <br>
-	<div class="">
-	    <canvas id="mainCanvas" width="350" height="350" ></canvas>
+	<div class="divS2" >
+	    <canvas id="mainCanvas" width="350" height="350"></canvas>
 	</div>
 	<script type="text/javascript" src="js/vue.min.js"></script>
 	<script type="text/javascript" src="js/three.js"></script>
 	<script type="text/javascript" src="js/game.js"></script>
 	<script type="text/javascript" src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js"></script>
-	<div>
+	<div class="divS3">
 	    <wb:follow-button uid="1934481170" type="gray_2" width="136" height="24"></wb:follow-button>
 	</div>
 	<br>
-	<div>
-	    <a href="/build/AddOne/index.html" class="buttonStyle1">AddOne</a>
+	<div class="divS1">
+	    <a href="/build/AddOne/index.html" class="buttonStyle1" left="0" >AddOne</a>
 	    <a href="/build/BlackJack/index.html" class="buttonStyle1">BlackJack</a>
-	    <a href="http://www.baidu.com/" class="buttonStyle1">baidu</a>
+	    <a href="http://www.baidu.com/" class="buttonStyle1" right="100%">baidu</a>
 	</div>
 <!--     
     <div>
@@ -135,7 +158,9 @@
     </div> 
 -->
     <br>
-    <p id="nowTime" class="divS1 " background:#dddddd> </p>
+    <div>
+    </div>
+    <p id="nowTime" class="divS111 "> </p>
     <script>
     myTimer();
     var myVar = setInterval(function() { myTimer() }, 300);
@@ -146,35 +171,15 @@
         document.getElementById("nowTime").innerHTML = t;
     }
     </script>
+    
+<!--
     <div>
-        <!-- <object data="images/jay.jpg"></object> -->
+        <object data="images/jay.jpg"></object>
     </div>
+-->
     <script src="js/swiper.min.js"></script>
     <script src="js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript">
-    var mySwiper = new Swiper('.swiper-container', {
-        loop: true,
-        autoplay: 3000,
-    });
 
-    $(function() {
-        $("#openGame").click(function() {
-            openApp();
-        });
-    });
-
-
-
-    function openApp() {
-        var gameId = document.getElementById("gameId").value;
-        var inviteCode = document.getElementById("inviteCode").value;
-
-        appUrl = "com.izhangxin.circle." + gameId + "://izhangxin?param=" + inviteCode;
-
-        alert(appUrl);
-        window.location.href = appUrl;
-    }
-    </script>
 </body>
 
 </html>
