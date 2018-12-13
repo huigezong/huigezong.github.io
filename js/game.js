@@ -9,8 +9,8 @@ var cubes = Array();
 var cubeNum = 3;
 
 function init() {
-    renderer.setClearColor(0xdddddd);
-    //renderer.setClearColor(0xffffff);
+    //renderer.setClearColor(0xdddddd);
+    renderer.setClearColor(0xffffff);
    
     camera.position.set(25, 25, 25);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
