@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>会哥的个人网站</title>
-<link rel="stylesheet" href="css/swiper.min.css">
-<link rel="icon" href="images/jay.jpg" type="image/x-icon" /> 
-<!--Swiper3.0.4-->
-<style>
-* {
-	margin: 0;
-	padding: 0;
-}
-.blue-slide {
-	background: #4390EE;
-}
-.red-slide {
-	background: #CA4040;
-}
-.orange-slide {
-	background: #FF8604;
-}
-.swiper-slide {
-	line-height: 300px;
-	color: #fff;
-	font-size: 36px;
-	text-align: center;
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>会哥的个人网站</title>
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<link rel="icon" href="images/jay.jpg" type="image/x-icon" /> 
+	<!--Swiper3.0.4-->
+	<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	.blue-slide {
+		background: #4390EE;
+	}
+	.red-slide {
+		background: #CA4040;
+	}
+	.orange-slide {
+		background: #FF8604;
+	}
+	.swiper-slide {
+		line-height: 300px;
+		color: #fff;
+		font-size: 36px;
+		text-align: center;
+	/*
+
+	border:2px solid;
+	border-radius:25px;
+	*/
+	/*box-shadow: 10px 10px 5px #888888;*/
 }
 
 .openGame{
@@ -42,62 +48,113 @@
 
 }
 
-</style>
-</head>
-<body>
-<div class="swiper-container">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide blue-slide">slider1</div>
-    <div class="swiper-slide red-slide">slider2</div>
-    <div class="swiper-slide orange-slide">slider3</div>
-  </div>
-</div>
-
-<br>
-
-<script type="text/javascript" src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js"></script>
-<div>
-  <canvas id="mainCanvas" width="400px" height="300px" ></canvas>
-  <wb:follow-button uid="1934481170" type="gray_2" width="136" height="24" ></wb:follow-button>
-</div>
-
-<br>
-
-<div>
-   <a href="/build/AddOne/index.html">AddOne</a>
-   <a href="/build/BlackJack/index.html">BlackJack</a>
-</div>
-<div>
-<!--form>
-	gameId:<br>
-	<input type="text" id="gameId" >
-	<br>
-	inviteCode:<br>
-	<input type="text" id="inviteCode">
-   	<input type="button" id="openGame" class="openGame"></input>
-</form-->
-</div>
-
-<p id="nowTime"></p>
-<script>
-var myVar=setInterval(function(){myTimer()},300);
-function myTimer(){
-	var d=new Date();
-	var t=d.toLocaleTimeString();
-	document.getElementById("nowTime").innerHTML=t;
+.divS1
+{
+	border:2px solid #a1a1a1;
+	padding:10px 40px; 
+	/*background:#dddddd;*/
+	/*width:300px;*/
+	border-radius:25px;
+	text-align: center;
 }
+
+
+.butS1{
+	border-radius: 25px;
+	background: #8AC007;
+	padding: 20px;
+	width: 200px;
+	height: 150px;
+}
+
+.buttonStyle1 {
+	background-color: #4CAF50;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide blue-slide">slider1</div>
+			<div class="swiper-slide red-slide">slider2</div>
+			<div class="swiper-slide orange-slide">slider3</div>
+		</div>
+	</div>
+
+
+	<br>
+
+	<div>
+		<canvas id="mainCanvas" width="400px" height="300px" ></canvas>
+	</div>
+
+	<script type="text/javascript" src="js/vue.min.js"></script>
+	<script type="text/javascript" src="js/three.js"></script>
+	<script type="text/javascript" src="js/tt.js"></script>
+
+	<script type="text/javascript" src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js"></script>
+	<div>
+		<wb:follow-button uid="1934481170" type="gray_2" width="136" height="24" ></wb:follow-button>
+	</div>
+
+	<br>
+
+
+
+
+	<div>
+		<a href="/build/AddOne/index.html" class="buttonStyle1">AddOne</a>
+		<a href="/build/BlackJack/index.html" class="buttonStyle1">BlackJack</a>
+		<a href="http://www.baidu.com/" class="buttonStyle1">百度一下</a>
+	</div>
+
+<!--div>
+	<form>
+		gameId:<br>
+		<input type="text" id="gameId" >
+		<br>
+		inviteCode:<br>
+		<input type="text" id="inviteCode">
+	   	<input type="button" id="openGame" class="openGame"></input>
+	</form>
+</div-->
+
+<br>
+
+<p id="nowTime" class="divS1 " background:#dddddd> </p>
+<script>
+	myTimer();
+	var myVar=setInterval(function(){myTimer()},300);
+	function myTimer(){
+		var d=new Date();
+		var t=d.toLocaleTimeString();
+		document.getElementById("nowTime").innerHTML=t;
+	}
 </script>
 
-<script type="text/javascript" src="js/three.js"></script>
-<script type="text/javascript" src="js/tt.js"></script>
-<script type="text/javascript" src="js/vue.min.js"></script>
-	
+
+
 <script src="js/swiper.min.js"></script>
 <script src="js/jquery-1.7.2.min.js" ></script>
 <script type="text/javascript">
 	var mySwiper = new Swiper('.swiper-container',{
-	loop: true,
-	autoplay: 3000,
+		loop: true,
+		autoplay: 3000,
 	});
 
 	$(function(){
