@@ -2,13 +2,15 @@ var renderer = new THREE.WebGLRenderer({
     canvas: document.getElementById('mainCanvas')
 });
 var scene = new THREE.Scene();
-var camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
+// var camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
+var camera = new THREE.OrthographicCamera(-8, 8, 4.5, -4.5, 0.1, 100);
 
 var cubes = Array();
+var cubeNum = 3;
 
 function init() {
-    //renderer.setClearColor(0xbbbbbb);
-    renderer.setClearColor(0xffffff);
+    renderer.setClearColor(0xbbbbbb);
+    //renderer.setClearColor(0xffffff);
    
     camera.position.set(25, 25, 25);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
@@ -50,14 +52,25 @@ function init() {
     */
     /*
     */
+
     var texture = new THREE.TextureLoader().load("images/jay.jpg");
-    var cube = new THREE.Mesh(new THREE.CubeGeometry(3, 3, 3),
-        new THREE.MeshLambertMaterial({
-            map: texture
-        })
-    );
-    cubes[0] = cube;
-    scene.add(cube);
+    for (var i = 0; i < cubeNum; i++) {
+        var cube = new THREE.Mesh(new THREE.CubeGeometry(3, 3, 3),
+            new THREE.MeshLambertMaterial({
+                map: texture
+            })
+        );
+        cubes[i] = cube;
+        cube.position.set(3.5*i - 5, 0, 0);
+        scene.add(cube);
+    }
+    // var cube = new THREE.Mesh(new THREE.CubeGeometry(2, 2, 2),
+    //     new THREE.MeshLambertMaterial({
+    //         map: texture
+    //     })
+    // );
+    // cubes[0] = cube;
+    // scene.add(cube);
     loop();
 
 
@@ -86,7 +99,29 @@ function animate() {
 var t=0;
 function loop(){
     t++;
-    cubes[0].rotation.set(t/100, 0,t/100);
+
+    // var index = t % cubeNum
+    // var rx = cubes[index].rotation.x
+    // var ry = cubes[index].rotation.y
+    // var rz = cubes[index].rotation.z
+
+    // rx += 0.01
+    // rz += 0.01
+    // cubes[index].rotation.set(rx, ry, rz);
+
+    for (var i = 0; i < cubeNum; i++) {
+        var rx = cubes[i].rotation.x
+        var ry = cubes[i].rotation.y
+        var rz = cubes[i].rotation.z
+
+        rx += 0.01
+        rz += 0.01
+
+        cubes[i].rotation.set(rx, ry, rz);
+    }
+
+
+    //cubes[0].rotation.set(t/100, 0,t/100);
     //camera.lookAt( {x:0, y:0, z:0 } );
     requestAnimationFrame(loop);
 }
