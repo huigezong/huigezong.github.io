@@ -130,27 +130,35 @@
 -->
 	
 	
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '267903917430788',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v3.2'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
+	<script>
+	  window.fbAsyncInit = function() {
+	    FB.init({
+	      appId      : '267903917430788',
+	      cookie     : true,
+	      xfbml      : true,
+	      version    : 'v3.2'
+	    });
+	      
+	    FB.AppEvents.logPageView();   
+	      
+	  };
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
+	  (function(d, s, id){
+	     var js, fjs = d.getElementsByTagName(s)[0];
+	     if (d.getElementById(id)) {return;}
+	     js = d.createElement(s); js.id = id;
+	     js.src = "https://connect.facebook.net/en_US/sdk.js";
+	     fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
+
+		function checkLoginState() {
+		  FB.getLoginStatus(function(response) {
+		    statusChangeCallback(response);
+		  });
+		}
+
+	</script>
+
     <br>
 	<div class="divS2" >
 	    <canvas id="mainCanvas" width="350" height="350"></canvas>
@@ -167,6 +175,12 @@
 	    <a href="/build/BlackJack/index.html" class="buttonStyle1">BlackJack</a>
 	    <a href="http://www.baidu.com/" class="buttonStyle1" right="100%">baidu</a>
 	</div>
+	<div>
+		<fb:login-button 
+		  scope="public_profile,email"
+		  onlogin="checkLoginState();">
+		</fb:login-button>
+	</div>>
 <!--     
     <div>
         <form>
