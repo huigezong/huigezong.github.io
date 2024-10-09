@@ -1,0 +1,26 @@
+{
+  "name": "lua2js",
+  "version": "0.0.9",
+  "description": "Lua 2 Javascript Transpiler",
+  "main": "index.js",
+  "scripts": {
+    "dev": "set DEBUG=express:* & node server.js",
+    "test": "jasmine-node ./test_spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/basicer/lua2js-dist"
+  },
+  "author": "Rob Blancakert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/basicer/lua2js/issues"
+  },
+  "homepage": "https://github.com/basicer/lua2js-dist",
+  "devDependencies": {
+    "escodegen": "^1.12.1",
+    "express": "^4.12.0",
+    "jasmine-node": "^1.14.5",
+    "pegjs": "^0.10.0"
+  }
+}

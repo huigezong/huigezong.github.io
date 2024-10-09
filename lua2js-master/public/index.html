@@ -1,0 +1,181 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+  <title>Lua 2 JS</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://bootswatch.com/3/darkly/bootstrap.css" rel="stylesheet">
+
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/angular@1.2.32/angular.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.4.8/src-noconflict/ace.js"></script>
+      <script src="ui-ace.js"></script>
+      <script src="piler.js"></script>
+      <script src="stdlib.js"></script>
+      <script src="escodegen.browser.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.4.8/src-noconflict/mode-lua.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.4.8/src-noconflict/mode-javascript.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+      <style>
+      .ace_editor { height: 500px; background-color: black; }
+      textarea { width:100%; height: 100px; font-size: 14pt }
+      .x { padding: 10px; color: white !important; overflow: auto; white-space: pre-wrap; }
+      .footer { margin-top: 20px; }
+      .modal-body hr { margin-top: 0; margin-bottom: 0; }
+      </style>
+    </head>
+
+    <body ng-app="MyApp" ng-controller="main">
+
+      <div class="container">
+        <div class="header">
+          <ul class="nav nav-pills pull-right">
+            <li><a href="#" data-toggle="modal" data-target="#options">Options</a></li>
+            <li class="active"><a href="#" ng-click="xeval()">Evaluate</a></li>
+          </ul>
+          <h3 class="text-muted">Lua 2 JS</h3>
+        </div>
+
+        <div class="row" style="padding-top: 10px">
+          <div class="col-sm-6">
+           <div ng-model="code" ui-ace="{
+           useWrapMode : true,
+           showGutter: true,
+           theme:'twilight',
+           mode: 'lua',
+           onLoad: aceLoaded,
+           onChange: aceChanged
+         }"></div>
+       </div>
+
+       <div class="col-sm-6">
+        <div ng-model="code2" ng-show="error == ''" ui-ace="{
+        useWrapMode : true,
+        showGutter: true,
+        theme:'twilight',
+        mode: 'javascript',
+        onLoad: aceLoaded2,
+        onChange: aceChanged2
+      }"></div>
+      <pre ng-show="error != ''" class="x ace_editor ace_dark ace-twilight">{{error}}
+      </pre>
+    </div>
+  </div>
+  <div class="footer">
+    <p>&copy; basicer 2014</p>
+  </div>
+
+</div> <!-- /container -->
+<div class="modal fade" id="options">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Parser Options</h4>
+      </div>
+      <div class="modal-body">
+        <h5>JavaScript Compat</h5>
+        <hr />
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="checkbox"><label><input type="checkbox" ng-model="opts.forceVar"> Force 'var' instead of 'let'</label></div>
+            <div class="checkbox"><label><input type="checkbox" ng-model="opts.luaOperators"> Use library functions for operators</label></div>
+            <div class="checkbox"><label><input type="checkbox" ng-model="opts.encloseWithFunctions"> Enclose scopes in functions</label></div>
+          </div>
+          <div class="col-sm-6">
+            <div class="checkbox"><label><input type="checkbox" ng-model="opts.decorateLuaObjects"> Decorate Lua objects</label></div>
+            <div class="checkbox"><label><input type="checkbox" ng-model="opts.luaCalls"> Proxy function calls </label></div>
+          </div>
+        </div>
+        
+        <h5>Error Handeling</h5>
+        <hr />
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="checkbox"><label><input type="checkbox" ng-model="opts.loose"> Loose Mode</label></div>
+          </div>
+          <div class="col-sm-6">
+            <div class="checkbox"><label><input type="checkbox" ng-model="opts.useStrict"> Use Strict</label></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript">
+
+__lua.env.io.write =  function() {
+    stdout += Array.prototype.reduce.call(arguments, (sum, i) => sum + i);
+}
+
+__lua.env.print = __lua.makeFunction(function print() { 
+  var args = Array.prototype.map.call(arguments, __lua.makeString);
+  stdout += Array.prototype.join.call(args, "\t") + "\n";
+  console.log.apply(console, args); 
+});
+
+_G = __lua.env;
+
+var myAppModule = angular.module('MyApp', ['ui.ace']);
+function update($scope) {
+  try {
+    $scope.error = "";
+    window.localStorage["code"] = $scope.code;
+    var c = parser.parse($scope.code, $scope.opts);
+    $scope.code2 = "(function() " + escodegen.generate(c) + ")();";
+  } catch ( e ) {
+    if (e.location) {
+      var errloc = e.location.start;
+      $scope.error = e.message + "\n\n\n" + "at " + errloc.line + ":" + errloc.column;
+    } else {
+      $scope.error = e.message
+    }
+    $scope.code2 = "";
+  }
+}
+
+function main($scope) { 
+
+  $scope.code = window.localStorage["code"] || "";
+  $scope.code2 = "{\n}";
+  $scope.opts = {forceVar: true, decorateLuaObjects: true, luaCalls: true, luaOperators: true,
+    encloseWithFunctions: false, useStrict: false };
+
+  $scope.fix = function(c) { return c.reverse(); }
+  $scope.aceLoaded = function(e) {
+    e.focus();
+  };
+  $scope.aceChanged = function() {
+    update($scope);
+  };
+  $scope.xeval = function() {
+    try {
+      stdout = 'Output:\n';
+      var gKeys = Object.keys(_G);
+      eval($scope.code2.replace(/^\(function\(\)/, '(function(' + gKeys.join(',') + ')')
+            .replace(/\(\);$/, '(' + gKeys.map(x => '_G.' + x).join(',') + ');'));
+    } catch ( e ) {
+      stdout = 'Error:\n' + e + '\n' + e.stack;
+    }
+    $scope.error = stdout;
+  }
+  $scope.$watch('opts', function() {
+    update($scope);
+  }, true);
+}
+</script>
+</body>
+</html>
+
